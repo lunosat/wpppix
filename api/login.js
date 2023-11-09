@@ -10,10 +10,6 @@ export default async function handler (req, res) {
 
         const { email } = req.body 
 
-        if(email === 'demo@demo.com'){
-            localStorage.setItem('isDemo', true)
-        }
-
         console.log(email)
         const user = await User.findOne({ email })
 
