@@ -38,6 +38,10 @@ const login = async () => {
             email: email.value
         })
 
+        if(email.value === 'demo@demo.com'){
+            localStorage.setItem('isDemo', true)
+        }
+
         console.log(res)
 
         if (res.status === 200) {
