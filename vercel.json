@@ -1,0 +1,29 @@
+{
+    "functions": {
+      "api/hello.js": {
+        "memory": 1024,
+        "maxDuration": 10
+      },
+      "api/login.js": {
+          "memory": 1024,
+          "maxDuration": 10
+      },
+      "api/webhook.js": {
+          "memory": 1024,
+          "maxDuration": 10
+      }
+    },
+    "env": {
+      "DB_URI": "mongodb+srv://admin:1234@wpppix.qvjhqa4.mongodb.net/?retryWrites=true&w=majority"
+    },
+    "routes": [
+      {
+          "handle": "filesystem"
+      },
+      {
+          "src": "/.*",
+          "dest": "/index.html"
+      }
+  ]
+  
+  }
