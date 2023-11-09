@@ -12,6 +12,8 @@
     "@mdi/font": "7.0.96",
     "axios": "^1.6.1",
     "core-js": "^3.29.0",
+    "mongoose": "^8.0.0",
+    "nodemailer": "^6.9.7",
     "pinia": "^2.0.0",
     "roboto-fontface": "*",
     "vue": "^3.2.0",
