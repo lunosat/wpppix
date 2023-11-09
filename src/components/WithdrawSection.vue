@@ -11,8 +11,31 @@
         ></v-select>
         <v-text-field variant="outlined" label="Chave pix" v-model="keyPix"></v-text-field>
         <v-text-field variant="outlined" prefix="R$" label="Valor" v-model="balance" disabled></v-text-field>
-        <v-btn class="w-100" color="green" size="x-large" @click="alertShow">Realizar saque</v-btn>
+        <v-btn class="w-100" color="green" size="x-large" @click="performWithdrawal">Realizar saque</v-btn>
     </v-sheet>
+
+    <!-- Diálogo que contém tanto o loading quanto a mensagem de sucesso -->
+    <v-dialog v-model="dialog">
+        <v-card rounded="lg">
+            <!-- Conteúdo do diálogo para o estado de carregamento -->
+            <v-card-text v-if="loading" class="text-center">
+                <v-progress-circular indeterminate size="64" color="green"></v-progress-circular>
+            </v-card-text>
+
+            <!-- Conteúdo do diálogo para a mensagem de sucesso -->
+            <div v-else>
+                <v-card-title class="headline text-center">Saque realizado!</v-card-title>
+                <v-card-text class="text-center">
+                    <v-icon large color="success" class="success-check">mdi-check-circle</v-icon>
+                    <p>Seu saque foi realizado com sucesso!</p>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="green darken-1" text @click="closeDialog">Fechar</v-btn>
+                </v-card-actions>
+            </div>
+        </v-card>
+    </v-dialog>
 </template>
 
 <script setup>
@@ -23,8 +46,10 @@ const selectedKey = ref()
 const alert = ref({ active: false, type: '', text: '', title: ''})
 const balance = ref()
 const keyPix = ref()
+const loading = ref(false)
+const dialog = ref(false)
 
-balance.value = balance.value = parseInt(localStorage.getItem('balance')).toFixed(2)
+balance.value = parseFloat(localStorage.getItem('balance')).toFixed(2)
 
 const isDemo = localStorage.getItem('isDemo')
 
@@ -33,12 +58,13 @@ if(isDemo){
     keyPix.value = '401.***.***-23'
 }
 
-const alertShow = () => {
+const performWithdrawal = () => {
     if(isDemo){
-        alert.value.active = true
-        alert.value.text = 'Seu saldo foi realizado com sucesso! Em breve receberá em sua conta.'
-        alert.value.title = 'Saque realizado!'
-        alert.value.type = 'success'
+        dialog.value = true
+        loading.value = true
+        setTimeout(() => {
+            loading.value = false
+        }, 3000)
     } else {
         alert.value.active = true
         alert.value.text = 'Por segurança seu saldo está retido por 7 dias.'
@@ -47,4 +73,15 @@ const alertShow = () => {
     }
 }
 
+const closeDialog = () => {
+    dialog.value = false
+    loading.value = false
+}
 </script>
+
+<style>
+
+.success-check {
+    font-size: 120px; /* Ajuste este valor conforme necessário */
+}
+</style>
