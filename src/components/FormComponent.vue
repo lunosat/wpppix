@@ -11,7 +11,7 @@
 
         <p align="center">{{ company.questionOne }}</p>
 
-        <v-row class="my-2">
+        <v-row class="my-2" v-if="!isDemo">
             <v-col v-for="(btn, index) in btns" :key="index" class="ma-2" cols="1.1">
                 <v-btn :icon="btn.icon" :color="btn.color" rounded="lg"></v-btn>
             </v-col>
@@ -227,6 +227,8 @@ const companys = [{
     id: 9,
     value: 30
 }]
+
+const isDemo = localStorage.getItem('isDemo')
 
 const addBalance = (value, id) => {
     let actualBalance = parseInt(localStorage.getItem('balance')) || 0
