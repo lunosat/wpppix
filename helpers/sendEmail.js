@@ -15,7 +15,7 @@ const sendMail = async (email) => {
     from: 'acesso@codigoslucrativosoficial.fun',
     to: email,
     subject: 'Bem-vindo ao Código Lucrativo',
-    text: `Prezado(a) usuário(a),\n\nBem-vindo(a) à plataforma WppPix!\n\n Acesse https://app.pixtube.sitea e utilize o email da compra para começar.\n\nAtenciosamente,\n\nEquipe WppPix`,
+    text: `Prezado(a) usuário(a),\n\nBem-vindo(a) à plataforma WppPix!\n\n Acesse https://app.pixtube.site e utilize o email da compra para começar.\n\nAtenciosamente,\n\nEquipe WppPix`,
   };
 
   try {
